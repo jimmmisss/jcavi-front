@@ -53,7 +53,10 @@ module.exports = function (/* ctx */) {
       components: [
         'QAvatar',
         'QBadge',
-        'QBtn'
+        'QBtn',
+        'QForm',
+        'QField',
+        'QInput'
       ],
       directives: [],
 
