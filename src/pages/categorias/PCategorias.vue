@@ -1,0 +1,7 @@
+<template>
+  <q-page>
+    <div class="row">
+      <h3>Categorias</h3>
+    </div>
+  </q-page>
+</template>
