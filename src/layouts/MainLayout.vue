@@ -76,25 +76,25 @@ export default {
           title: 'Fornecedor',
           caption: 'cadastrar/listar fornecedor',
           icon: 'airport_shuttle',
-          link: '/fornecedor'
+          link: '/fabricantes'
         },
         {
           title: 'Produto',
           caption: 'cadastrar/listar produto',
           icon: 'dashboard',
-          link: '/produto'
+          link: '/produtos'
         },
         {
           title: 'Usuário',
           caption: 'cadastrar/listar usuário',
           icon: 'person_add',
-          link: '/usuario'
+          link: '/usuarios'
         },
         {
           title: 'Pedido',
           caption: 'cadastrar/listar pedido de venda',
           icon: 'domain',
-          link: '/pedido'
+          link: '/pedidos'
         }
       ]
     }

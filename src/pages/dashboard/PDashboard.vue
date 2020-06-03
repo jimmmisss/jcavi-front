@@ -1,11 +1,11 @@
 <template>
   <q-page padding>
-    <h3>Forncedor</h3>
+    <h3>Dashboard</h3>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'PFornecedor'
+  name: 'PDashboard'
 }
 </script>

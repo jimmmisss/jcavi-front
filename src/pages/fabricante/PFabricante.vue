@@ -4,7 +4,7 @@
     <div class="q-pa-md q-gutter-sm">
       <q-breadcrumbs>
         <q-breadcrumbs-el label="home" icon="home" to="/" />
-        <q-breadcrumbs-el label="usuário" />
+        <q-breadcrumbs-el label="fabricante" />
       </q-breadcrumbs>
     </div>
 
@@ -15,9 +15,9 @@
         >
           <q-input
             filled
-            v-model="usuario.nome"
-            label="Usuário *"
-            hint="Digite o nome do usuário"
+            v-model="fabricante.nome"
+            label="Fabricante *"
+            hint="Digite o nome do fabricante"
             lazy-rules
             :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
@@ -38,7 +38,7 @@
 export default {
   data () {
     return {
-      usuario: {
+      fabricante: {
         nome: ''
       }
     }
@@ -46,36 +46,31 @@ export default {
 
   methods: {
     gravar () {
-      const cloned = JSON.parse(JSON.stringify(this.usuario))
-      this.$axios.post('http://localhost:8081/v1/usuario', cloned)
+      const cloned = JSON.parse(JSON.stringify(this.fabricante))
+      this.$axios.post('http://localhost:8081/v1/fabricante', cloned)
         .then(function (response) {
-          console.log('salvou usuário', response.message)
+          console.log('salvou fabricante')
           this.$q.notify({
             color: 'red-5',
             textColor: 'white',
             icon: 'success',
-            message: 'Usuário salva com sucesso'
+            message: 'Fabricante salvo com sucesso' + response.message
           })
         })
         .catch(function (error) {
-          console.log('erro ao salvar usuário', error.message)
+          console.log(error)
+          this.$q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: error.message
+          })
         })
       this.reset()
     },
 
-    buscarFuncao () {
-      this.$q.axios.get('http://localhost:8081/v1/funcoes')
-        .then(function (response) {
-          console.log('Dados: ', response.data)
-          this.nome = response.data
-        })
-        .catch(function (error) {
-          console.log(error.message)
-        })
-    },
-
     reset () {
-      this.usuario.nome = ''
+      this.fabricante.nome = ''
     }
   }
 
