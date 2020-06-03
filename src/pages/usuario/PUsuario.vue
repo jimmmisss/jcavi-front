@@ -22,6 +22,8 @@
             :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
 
+          <q-select filled v-model="usuario.funcoes" :options="funcoes" label="Função do usuário" />
+
           <div>
             <q-btn @click="gravar()" label="adicionar" color="primary"/>
             <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
@@ -39,9 +41,21 @@ export default {
   data () {
     return {
       usuario: {
-        nome: ''
-      }
+        nome: '',
+        email: '',
+        senha: '',
+        profissao: '',
+        salario: '',
+        enderecos: []
+
+      },
+      funcoes: [],
+      value: ''
     }
+  },
+
+  mounted () {
+    this.buscarFuncao()
   },
 
   methods: {
@@ -64,12 +78,12 @@ export default {
     },
 
     buscarFuncao () {
-      this.$q.axios.get('http://localhost:8081/v1/funcoes')
-        .then(function (response) {
+      this.$axios.get('http://localhost:8081/v1/funcoes')
+        .then((response) => {
           console.log('Dados: ', response.data)
-          this.nome = response.data
+          this.funcoes = response.data
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error.message)
         })
     },
