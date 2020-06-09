@@ -115,15 +115,6 @@
           </div>
         </div>
 
-        <!-- <div class="row justify-center q-gutter-md row items-start">
-          <div class="col-2">
-            <select>
-              <option value="" disabled selected>Escolha uma Função</option>
-              <option v-for="funcao in usuario.funcoes" :key="funcao.id" :value="funcao.id">{{ funcao.nome }}</option>
-            </select>
-          </div>
-        </div> -->
-
         <div class="row justify-center q-gutter-md row items-start">
           <div class="col-2">
             <q-select filled multiple
@@ -187,7 +178,7 @@ export default {
       console.log(cloned)
       this.$axios.post('http://localhost:8081/v1/usuario', cloned)
         .then(function (response) {
-          console.log('salvou usuário', response.message)
+          this.reset()
         })
         .catch(function (error) {
           console.log('erro ao salvar usuário', error.message)
@@ -208,6 +199,14 @@ export default {
 
     reset () {
       this.usuario.nome = ''
+      this.usuario.email = ''
+      this.usuario.senha = ''
+      this.usuario.profissao = ''
+      this.usuario.salario = ''
+      this.usuario.enderecos.bairro = ''
+      this.usuario.enderecos.cep = ''
+      this.usuario.enderecos.cidade = ''
+      this.usuario.enderecos.logradouro = ''
     }
   }
 
