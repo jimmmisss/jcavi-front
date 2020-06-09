@@ -78,21 +78,21 @@
           <div class="col-3">
             <q-input
               filled
-              v-model="usuario.enderecos.cep"
+              v-model="usuario.enderecos[0].cep"
               label="CEP *"
               hint="Digite cep" />
           </div>
           <div class="col-4">
             <q-input
               filled
-              v-model="usuario.enderecos.logradouro"
+              v-model="usuario.enderecos[0].logradouro"
               label="Logradouro *"
               hint="Digite logradouro" />
           </div>
           <div class="col-3">
             <q-input
               filled
-              v-model="usuario.enderecos.bairro"
+              v-model="usuario.enderecos[0].bairro"
               label="Bairro *"
               hint="Digite bairro" />
           </div>
@@ -102,25 +102,38 @@
           <div class="col-7">
             <q-input
               filled
-              v-model="usuario.enderecos.cidade"
+              v-model="usuario.enderecos[0].cidade"
               label="Cidade *"
               hint="Digite cidade" />
           </div>
           <div class="col-3">
             <q-input
               filled
-              v-model="usuario.enderecos.uf"
+              v-model="usuario.enderecos[0].uf"
               label="UF *"
               hint="Digite uf" />
           </div>
         </div>
 
-        <div class="row justify-center q-gutter-md row items-start">
+        <!-- <div class="row justify-center q-gutter-md row items-start">
           <div class="col-2">
             <select>
               <option value="" disabled selected>Escolha uma Função</option>
               <option v-for="funcao in usuario.funcoes" :key="funcao.id" :value="funcao.id">{{ funcao.nome }}</option>
             </select>
+          </div>
+        </div> -->
+
+        <div class="row justify-center q-gutter-md row items-start">
+          <div class="col-2">
+            <q-select
+              filled
+              v-model="multiple"
+              multiple
+              :options="options"
+              label="Multiple"
+              style="width: 250px"
+            />
           </div>
         </div>
 
@@ -146,7 +159,6 @@ export default {
         senha: '',
         profissao: '',
         salario: '',
-        funcoes: [],
         enderecos: [
           {
             bairro: '',
@@ -155,10 +167,12 @@ export default {
             logradouro: '',
             uf: ''
           }
-        ]
+        ],
+        funcoes: []
       },
-      value: '',
-      isPwd: true
+      options: [],
+      isPwd: true,
+      multiple: null
     }
   },
 
@@ -169,6 +183,7 @@ export default {
   methods: {
     gravar () {
       const cloned = JSON.parse(JSON.stringify(this.usuario))
+      console.log(cloned)
       this.$axios.post('http://localhost:8081/v1/usuario', cloned)
         .then(function (response) {
           console.log('salvou usuário', response.message)
@@ -183,7 +198,7 @@ export default {
       this.$axios.get('http://localhost:8081/v1/funcoes')
         .then((response) => {
           console.log('Dados: ', response.data)
-          this.usuario.funcoes = response.data
+          this.options = response.data
         })
         .catch((error) => {
           console.log(error.message)
