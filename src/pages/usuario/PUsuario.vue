@@ -126,14 +126,15 @@
 
         <div class="row justify-center q-gutter-md row items-start">
           <div class="col-2">
-            <q-select
-              filled
-              v-model="multiple"
-              multiple
-              :options="options"
-              label="Multiple"
+            <q-select filled multiple
+              v-model="usuario.funcoes"
+              :options="funcoes"
+              option-value="id"
+              option-label="nome"
+              label="Funções" use-chips counter hint="Total:"
               style="width: 250px"
-            />
+              lazy-rules :rules="[ val => val && val !== null || 'É obrigatório escolher pelo menos uma função']"
+              />
           </div>
         </div>
 
@@ -170,7 +171,7 @@ export default {
         ],
         funcoes: []
       },
-      options: [],
+      funcoes: [],
       isPwd: true,
       multiple: null
     }
@@ -197,8 +198,8 @@ export default {
     buscarFuncao () {
       this.$axios.get('http://localhost:8081/v1/funcoes')
         .then((response) => {
-          console.log('Dados: ', response.data)
-          this.options = response.data
+          console.log('Dados: ', response.data[0].nome)
+          this.funcoes = response.data
         })
         .catch((error) => {
           console.log(error.message)
