@@ -73,6 +73,48 @@
           </div>
         </div>
 
+        <!-- endereço -->
+        <div class="row justify-center q-gutter-md row items-start">
+          <div class="col-3">
+            <q-input
+              filled
+              v-model="usuario.enderecos.cep"
+              label="CEP *"
+              hint="Digite cep" />
+          </div>
+          <div class="col-4">
+            <q-input
+              filled
+              v-model="usuario.enderecos.logradouro"
+              label="Logradouro *"
+              hint="Digite logradouro" />
+          </div>
+          <div class="col-3">
+            <q-input
+              filled
+              v-model="usuario.enderecos.bairro"
+              label="Bairro *"
+              hint="Digite bairro" />
+          </div>
+        </div>
+
+        <div class="row justify-center q-gutter-md row items-start">
+          <div class="col-7">
+            <q-input
+              filled
+              v-model="usuario.enderecos.cidade"
+              label="Cidade *"
+              hint="Digite cidade" />
+          </div>
+          <div class="col-3">
+            <q-input
+              filled
+              v-model="usuario.enderecos.uf"
+              label="UF *"
+              hint="Digite uf" />
+          </div>
+        </div>
+
         <div class="row justify-center q-gutter-md row items-start">
           <div class="col-2">
             <select>
@@ -105,8 +147,15 @@ export default {
         profissao: '',
         salario: '',
         funcoes: [],
-        enderecos: []
-
+        enderecos: [
+          {
+            bairro: '',
+            cep: '',
+            cidade: '',
+            logradouro: '',
+            uf: ''
+          }
+        ]
       },
       value: '',
       isPwd: true
