@@ -8,11 +8,11 @@
       </q-breadcrumbs>
     </div>
 
-    <div class="row justify-center">
-      <div class="col-6">
-        <q-form
-          class="q-gutter-md q-mt-lg"
-        >
+    <q-form
+      class="q-gutter-md q-mt-lg"
+    >
+      <div class="row justify-center q-gutter-md row items-start">
+        <div class="col-10">
           <q-input
             filled
             v-model="usuario.nome"
@@ -21,16 +21,74 @@
             lazy-rules
             :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
-
-          <q-select filled v-model="usuario.funcoes" :options="funcoes" label="Função do usuário" />
-
-          <div>
-            <q-btn @click="gravar()" label="adicionar" color="primary"/>
-            <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
-          </div>
-        </q-form>
+        </div>
       </div>
 
+      <div class="row justify-center q-gutter-md row items-start">
+        <div class="col-8 ">
+          <q-input
+            filled
+            v-model="usuario.email"
+            label="Email *"
+            hint="Digite o email do usuário"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
+          />
+        </div>
+
+        <div class="col-2 justify-center">
+          <q-input v-model="usuario.senha" filled :type="isPwd ? 'password' : 'text'" hint="Digite a senha">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
+        </div>
+      </div>
+
+      <div class="row justify-center q-gutter-md row items-start">
+          <div class="col-6">
+            <q-input
+              filled
+              v-model="usuario.profissao"
+              label="Profissão *"
+              hint="Digite o profisão do usuário"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
+            />
+          </div>
+
+          <div class="col-4 justify-center">
+            <q-input
+              filled
+              v-model="usuario.salario"
+              label="Salário *"
+              hint="Digite salário"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
+            />
+          </div>
+        </div>
+
+        <div class="row justify-center q-gutter-md row items-start">
+          <div class="col-2">
+            <select>
+              <option value="" disabled selected>Escolha uma Função</option>
+              <option v-for="funcao in usuario.funcoes" :key="funcao.id" :value="funcao.id">{{ funcao.nome }}</option>
+            </select>
+          </div>
+        </div>
+
+    </q-form>
+
+    <div class="row justify-center q-gutter-md row items-start q-mt-md">
+      <div>
+        <q-btn @click="gravar()" label="adicionar" color="primary"/>
+        <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>
     </div>
 
   </q-page>
@@ -46,11 +104,12 @@ export default {
         senha: '',
         profissao: '',
         salario: '',
+        funcoes: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
         enderecos: []
 
       },
-      funcoes: [],
-      value: ''
+      value: '',
+      isPwd: true
     }
   },
 
@@ -64,12 +123,6 @@ export default {
       this.$axios.post('http://localhost:8081/v1/usuario', cloned)
         .then(function (response) {
           console.log('salvou usuário', response.message)
-          this.$q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'success',
-            message: 'Usuário salva com sucesso'
-          })
         })
         .catch(function (error) {
           console.log('erro ao salvar usuário', error.message)
@@ -81,7 +134,7 @@ export default {
       this.$axios.get('http://localhost:8081/v1/funcoes')
         .then((response) => {
           console.log('Dados: ', response.data)
-          this.funcoes = response.data
+          this.usuario.funcoes = response.data
         })
         .catch((error) => {
           console.log(error.message)

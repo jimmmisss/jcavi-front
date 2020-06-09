@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          JCAVI
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -30,7 +30,7 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Menu
         </q-item-label>
         <MenuLink
           v-for="link in menuItems"
@@ -73,8 +73,8 @@ export default {
           link: '/funcoes'
         },
         {
-          title: 'Fornecedor',
-          caption: 'cadastrar/listar fornecedor',
+          title: 'fabricante',
+          caption: 'cadastrar/listar fabricante',
           icon: 'airport_shuttle',
           link: '/fabricantes'
         },
