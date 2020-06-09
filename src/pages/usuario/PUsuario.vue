@@ -104,7 +104,7 @@ export default {
         senha: '',
         profissao: '',
         salario: '',
-        funcoes: ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'],
+        funcoes: [],
         enderecos: []
 
       },
