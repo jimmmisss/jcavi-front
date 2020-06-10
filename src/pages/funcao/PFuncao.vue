@@ -18,12 +18,10 @@
             v-model="funcao.nome"
             label="Função *"
             hint="Digite o nome da função"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
 
           <div>
-            <q-btn @click="gravar()" label="adicionar" color="primary" to="funcao-lista"/>
+            <q-btn @click="gravar()" label="adicionar" color="primary" to="/funcao/lista"/>
             <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
         </q-form>
@@ -50,21 +48,9 @@ export default {
       this.$axios.post('http://localhost:8081/v1/funcao', cloned)
         .then(function (response) {
           console.log('salvou categoria')
-          this.$q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'success',
-            message: 'Função salva com sucesso' + response.message
-          })
         })
         .catch(function (error) {
           console.log(error)
-          this.$q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: error.message
-          })
         })
       this.reset()
     },

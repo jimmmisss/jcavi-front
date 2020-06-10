@@ -21,7 +21,7 @@
           />
 
           <div>
-            <q-btn @click="gravar()" label="adicionar" color="primary" to="fabricante-lista"/>
+            <q-btn @click="gravar()" label="adicionar" color="primary" to="/fabricante/lista"/>
             <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
         </q-form>

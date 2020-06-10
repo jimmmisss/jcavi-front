@@ -123,7 +123,7 @@
 
     <div class="row justify-center q-gutter-md row items-start q-mt-md">
       <div>
-        <q-btn @click="gravar()" label="adicionar" color="primary" to="/produto-lista"/>
+        <q-btn @click="gravar()" label="adicionar" color="primary" to="/usuario/lista"/>
         <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </div>
@@ -168,24 +168,11 @@ export default {
       console.log(cloned)
       this.$axios.post('http://localhost:8081/v1/usuario', cloned)
         .then(function (response) {
-          this.reset()
-          this.$q.notify({
-            color: 'positive',
-            position: 'top',
-            message: 'Usuário salvo com sucesso',
-            icon: 'report_problem'
-          })
+          console.log('sucesso')
         })
         .catch(function (error) {
           console.log('erro ao salvar usuário', error.message)
-          this.$q.notify({
-            color: 'negative',
-            position: 'top',
-            message: 'Algo deu errado ao salvar usuário',
-            icon: 'report_problem'
-          })
         })
-      this.reset()
     },
 
     buscarFuncao () {
@@ -195,26 +182,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.message)
-          this.$q.notify({
-            color: 'negative',
-            position: 'top',
-            message: 'Algo deu errado ao buscar funções',
-            icon: 'report_problem'
-          })
         })
-    },
-
-    reset () {
-      this.usuario.nome = ''
-      this.usuario.email = ''
-      this.usuario.senha = ''
-      this.usuario.profissao = ''
-      this.usuario.salario = ''
-      this.usuario.enderecos[0].bairro = ''
-      this.usuario.enderecos[0].cep = ''
-      this.usuario.enderecos[0].cidade = ''
-      this.usuario.enderecos[0].logradouro = ''
-      this.usuario.enderecos[0].uf = ''
     }
   }
 

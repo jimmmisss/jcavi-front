@@ -3,6 +3,7 @@
     <div class="row col-10 justify-center text-h5">Lista Usuários</div>
     <div class="row q-pa-md justify-center">
       <q-table class="col-10"
+        dense
         :data="usuarios"
         :columns="colunas"
         row-key="nome"
