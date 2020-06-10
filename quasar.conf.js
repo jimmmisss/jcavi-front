@@ -57,7 +57,11 @@ module.exports = function (/* ctx */) {
         'QForm',
         'QField',
         'QInput',
-        'QSelect'
+        'QSelect',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd'
       ],
       directives: [],
 

@@ -18,12 +18,10 @@
             v-model="categoria.nome"
             label="Categria *"
             hint="Digite o nome da categoria"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
 
           <div>
-            <q-btn @click="gravar()" label="adicionar" color="primary"/>
+            <q-btn @click="gravar()" label="adicionar" color="primary" to="/categorias-lista"/>
             <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
         </q-form>
@@ -40,7 +38,8 @@ export default {
     return {
       categoria: {
         nome: ''
-      }
+      },
+      funcoes: []
     }
   },
 

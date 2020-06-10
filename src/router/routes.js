@@ -5,7 +5,10 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/dashboard/PDashboard.vue') },
+
       { path: 'categorias', component: () => import('pages/categorias/PCategorias.vue') },
+      { path: 'categorias-lista', component: () => import('pages/categorias/PListaCategorias.vue') },
+
       { path: 'funcoes', component: () => import('pages/funcao/PFuncao.vue') },
       { path: 'usuarios', component: () => import('pages/usuario/PUsuario.vue') },
       { path: 'fabricantes', component: () => import('pages/fabricante/PFabricante.vue') },

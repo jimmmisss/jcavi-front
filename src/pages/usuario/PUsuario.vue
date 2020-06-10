@@ -18,8 +18,6 @@
             v-model="usuario.nome"
             label="Usuário *"
             hint="Digite o nome do usuário"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
         </div>
       </div>
@@ -31,8 +29,6 @@
             v-model="usuario.email"
             label="Email *"
             hint="Digite o email do usuário"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
         </div>
 
@@ -56,8 +52,6 @@
               v-model="usuario.profissao"
               label="Profissão *"
               hint="Digite o profisão do usuário"
-              lazy-rules
-              :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
             />
           </div>
 
@@ -67,8 +61,6 @@
               v-model="usuario.salario"
               label="Salário *"
               hint="Digite salário"
-              lazy-rules
-              :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
             />
           </div>
         </div>
@@ -123,8 +115,6 @@
               option-value="id"
               option-label="nome"
               label="Funções" use-chips counter hint="Total:"
-              style="width: 250px"
-              lazy-rules :rules="[ val => val && val !== null || 'É obrigatório escolher pelo menos uma função']"
               />
           </div>
         </div>
@@ -179,9 +169,21 @@ export default {
       this.$axios.post('http://localhost:8081/v1/usuario', cloned)
         .then(function (response) {
           this.reset()
+          this.$q.notify({
+            color: 'positive',
+            position: 'top',
+            message: 'Usuário salvo com sucesso',
+            icon: 'report_problem'
+          })
         })
         .catch(function (error) {
           console.log('erro ao salvar usuário', error.message)
+          this.$q.notify({
+            color: 'negative',
+            position: 'top',
+            message: 'Algo deu errado ao salvar usuário',
+            icon: 'report_problem'
+          })
         })
       this.reset()
     },
@@ -189,11 +191,16 @@ export default {
     buscarFuncao () {
       this.$axios.get('http://localhost:8081/v1/funcoes')
         .then((response) => {
-          console.log('Dados: ', response.data[0].nome)
           this.funcoes = response.data
         })
         .catch((error) => {
           console.log(error.message)
+          this.$q.notify({
+            color: 'negative',
+            position: 'top',
+            message: 'Algo deu errado ao buscar funções',
+            icon: 'report_problem'
+          })
         })
     },
 
@@ -203,10 +210,11 @@ export default {
       this.usuario.senha = ''
       this.usuario.profissao = ''
       this.usuario.salario = ''
-      this.usuario.enderecos.bairro = ''
-      this.usuario.enderecos.cep = ''
-      this.usuario.enderecos.cidade = ''
-      this.usuario.enderecos.logradouro = ''
+      this.usuario.enderecos[0].bairro = ''
+      this.usuario.enderecos[0].cep = ''
+      this.usuario.enderecos[0].cidade = ''
+      this.usuario.enderecos[0].logradouro = ''
+      this.usuario.enderecos[0].uf = ''
     }
   }
 
