@@ -3,7 +3,7 @@
     <div class="row col-10 justify-center text-h5">Lista Categoria</div>
     <div class="row q-pa-md justify-center">
       <q-table class="col-10"
-        :data="categorias"
+        :data="fabricantes"
         :columns="colunas"
         row-key="nome"
       />
@@ -20,20 +20,20 @@ export default {
         { name: 'id', align: 'right', label: 'ID', field: 'id', sortable: true },
         { name: 'nome', align: 'left', label: 'nome', field: 'nome', sortable: true }
       ],
-      categorias: []
+      fabricantes: []
     }
   },
 
   mounted () {
-    this.buscarCategorias()
+    this.buscarFabricantes()
   },
 
   methods: {
 
-    buscarCategorias () {
-      this.$axios.get('http://localhost:8081/v1/categorias')
+    buscarFabricantes () {
+      this.$axios.get('http://localhost:8081/v1/fabricantes')
         .then((response) => {
-          this.categorias = response.data
+          this.fabricantes = response.data
         })
     }
 

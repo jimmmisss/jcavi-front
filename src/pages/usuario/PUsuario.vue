@@ -123,7 +123,7 @@
 
     <div class="row justify-center q-gutter-md row items-start q-mt-md">
       <div>
-        <q-btn @click="gravar()" label="adicionar" color="primary"/>
+        <q-btn @click="gravar()" label="adicionar" color="primary" to="/produto-lista"/>
         <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </div>

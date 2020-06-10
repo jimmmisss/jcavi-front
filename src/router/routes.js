@@ -10,10 +10,18 @@ const routes = [
       { path: 'categorias-lista', component: () => import('pages/categorias/PListaCategorias.vue') },
 
       { path: 'funcoes', component: () => import('pages/funcao/PFuncao.vue') },
+      { path: 'funcao-lista', component: () => import('pages/funcao/PListaFuncoes.vue') },
+
       { path: 'usuarios', component: () => import('pages/usuario/PUsuario.vue') },
+      { path: 'usuario-lista', component: () => import('pages/usuario/PListaUsuarios.vue') },
+
       { path: 'fabricantes', component: () => import('pages/fabricante/PFabricante.vue') },
+      { path: 'fabricante-lista', component: () => import('pages/fabricante/PListaFabricantes.vue') },
+
       { path: 'pedidos', component: () => import('pages/pedido/PPedido.vue') },
-      { path: 'produtos', component: () => import('pages/produto/PProduto') }
+
+      { path: 'produtos', component: () => import('pages/produto/PProduto') },
+      { path: 'produto-lista', component: () => import('pages/produto/PListaProdutos.vue') }
 
     ]
   }

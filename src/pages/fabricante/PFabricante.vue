@@ -18,12 +18,10 @@
             v-model="fabricante.nome"
             label="Fabricante *"
             hint="Digite o nome do fabricante"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Campo obrigatório']"
           />
 
           <div>
-            <q-btn @click="gravar()" label="adicionar" color="primary"/>
+            <q-btn @click="gravar()" label="adicionar" color="primary" to="fabricante-lista"/>
             <q-btn label="limpar" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
         </q-form>
@@ -50,21 +48,9 @@ export default {
       this.$axios.post('http://localhost:8081/v1/fabricante', cloned)
         .then(function (response) {
           console.log('salvou fabricante')
-          this.$q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'success',
-            message: 'Fabricante salvo com sucesso' + response.message
-          })
         })
         .catch(function (error) {
           console.log(error)
-          this.$q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: error.message
-          })
         })
       this.reset()
     },
